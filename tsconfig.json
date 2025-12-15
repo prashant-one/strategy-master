@@ -24,14 +24,24 @@
     "useDefineForClassFields": false,
     "baseUrl": "src/main/frontend",
     "paths": {
-      "@vaadin/flow-frontend": ["generated/jar-resources"],
-      "@vaadin/flow-frontend/*": ["generated/jar-resources/*"],
-      "Frontend/*": ["*"]
+      "@vaadin/flow-frontend": [
+        "generated/jar-resources"
+      ],
+      "@vaadin/flow-frontend/*": [
+        "generated/jar-resources/*"
+      ],
+      "Frontend/*": [
+        "*"
+      ],
+      "@/*": [
+        "themes/strategymaster/*"
+      ]
     }
   },
   "include": [
     "src/main/frontend/**/*",
-    "types.d.ts"
+    "types.d.ts",
+    "@layout.tsx"
   ],
   "exclude": [
     "src/main/frontend/generated/jar-resources/**"
