@@ -206,8 +206,16 @@ public class StrategyParserService {
                 return new UnderIndicatorRule(indicator, value);
             case ">":
                 return new OverIndicatorRule(indicator, value);
+            case "<=":
+                return new OrRule(
+                        new UnderIndicatorRule(indicator, value),
+                        new IsEqualRule(indicator, value));
+            case ">=":
+                return new OrRule(
+                        new OverIndicatorRule(indicator, value),
+                        new IsEqualRule(indicator, value));
             case "=":
-                return new IsEqualRule(indicator, value); // Not standard, maybe use Crossing
+                return new IsEqualRule(indicator, value);
             default:
                 throw new IllegalArgumentException("Unknown operator: " + operator);
         }
@@ -220,6 +228,14 @@ public class StrategyParserService {
                 return new UnderIndicatorRule(left, right);
             case ">":
                 return new OverIndicatorRule(left, right);
+            case "<=":
+                return new OrRule(
+                        new UnderIndicatorRule(left, right),
+                        new IsEqualRule(left, right));
+            case ">=":
+                return new OrRule(
+                        new OverIndicatorRule(left, right),
+                        new IsEqualRule(left, right));
             case "crossesUp":
                 return new CrossedUpIndicatorRule(left, right);
             case "crossesDown":

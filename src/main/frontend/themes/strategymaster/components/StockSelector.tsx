@@ -14,13 +14,13 @@ interface StockSelectorProps {
 
 const STOCKS = [
   { symbol: 'NIFTY', name: 'NIFTY 50' },
-  { symbol: 'TCS', name: 'Tata Consultancy Services' },
-  { symbol: 'INFY', name: 'Infosys Ltd' },
-  { symbol: 'RELIANCE', name: 'Reliance Industries' },
-  { symbol: 'HDFCBANK', name: 'HDFC Bank' },
-  { symbol: 'ICICIBANK', name: 'ICICI Bank' },
-  { symbol: 'WIPRO', name: 'Wipro Ltd' },
-  { symbol: 'SBIN', name: 'State Bank of India' }
+  { symbol: 'TCS.NS', name: 'Tata Consultancy Services' },
+  { symbol: 'INFY.NS', name: 'Infosys Ltd' },
+  { symbol: 'RELIANCE.NS', name: 'Reliance Industries' },
+  { symbol: 'HDFCBANK.NS', name: 'HDFC Bank' },
+  { symbol: 'ICICIBANK.NS', name: 'ICICI Bank' },
+  { symbol: 'WIPRO.NS', name: 'Wipro Ltd' },
+  { symbol: 'SBIN.NS', name: 'State Bank of India' }
 ];
 
 export function StockSelector({

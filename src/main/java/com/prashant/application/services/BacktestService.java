@@ -1,5 +1,7 @@
 package com.prashant.application.services;
 
+import com.prashant.application.broker.StockDataRecord;
+import com.prashant.application.broker.YahooFetchService;
 import com.prashant.application.dto.strategy.BacktestResult;
 import com.prashant.application.dto.strategy.StrategyRequest;
 import com.prashant.application.dto.strategy.TradeResult;
@@ -14,20 +16,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 public class BacktestService {
 
     private final StrategyParserService strategyParserService;
+    private final YahooFetchService yahooFetchService;
 
-    public BacktestService(StrategyParserService strategyParserService) {
+    public BacktestService(StrategyParserService strategyParserService, YahooFetchService yahooFetchService) {
         this.strategyParserService = strategyParserService;
+        this.yahooFetchService = yahooFetchService;
     }
 
     public BacktestResult runBacktest(StrategyRequest request) {
-        // 1. Generate Mock Data
-        BarSeries series = generateMockSeries();
+        // 1. Fetch Real Data from Yahoo Finance
+        BarSeries series = fetchRealData(request.getStockSymbol(), request.getRange(), request.getInterval());
 
         // 2. Parse Strategy
         Strategy strategy = strategyParserService.parse(request, series);
@@ -114,37 +117,33 @@ public class BacktestService {
         return result;
     }
 
-    private BarSeries generateMockSeries() {
-        BarSeries series = new BaseBarSeriesBuilder().withName("mock_data").build();
-        ZonedDateTime endTime = ZonedDateTime.now(ZoneId.of("UTC"));
-        double price = 100.0;
-        Random random = new Random();
+    private BarSeries fetchRealData(String stockSymbol, String range, String interval) {
+        // Fetch data from Yahoo Finance
+        List<StockDataRecord> stockData = yahooFetchService.fetchSockData(stockSymbol, range, interval);
 
-        for (int i = 0; i < 200; i++) {
-            price = price + (random.nextDouble() - 0.5) * 5; // Random walk
-            if (price < 10)
-                price = 10; // Floor
+        // Create BarSeries
+        BarSeries series = new BaseBarSeriesBuilder().withName(stockSymbol).build();
 
-            // Simple OHLC generation
-            double open = price;
-            double close = price + (random.nextDouble() - 0.5) * 2;
-            double high = Math.max(open, close) + random.nextDouble();
-            double low = Math.min(open, close) - random.nextDouble();
-            double volume = 1000 + random.nextInt(500);
+        // Convert StockDataRecord to BarSeries
+        for (StockDataRecord record : stockData) {
+            // Convert LocalDate to ZonedDateTime (end of day)
+            ZonedDateTime endTime = record.timeStamp()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .plusDays(1)
+                    .minusSeconds(1);
 
-            // series.addBar(endTime.minusDays(200 - i), open, high, low, close, volume);
-            // ta4j 0.22 uses Duration/ZonedDateTime for addBar
             series.barBuilder()
                     .timePeriod(java.time.Duration.ofDays(1))
-                    .endTime(endTime.minusDays(200 - i).toInstant())
-                    .openPrice(open)
-                    .highPrice(high)
-                    .lowPrice(low)
-                    .closePrice(close)
-                    .volume(volume)
+                    .endTime(endTime.toInstant())
+                    .openPrice(record.open())
+                    .highPrice(record.high())
+                    .lowPrice(record.low())
+                    .closePrice(record.close())
+                    .volume(record.volume() != null ? record.volume() : 0)
                     .amount(0)
                     .add();
         }
+
         return series;
     }
 }
