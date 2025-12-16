@@ -1,7 +1,7 @@
 import { Plus, Folder } from 'lucide-react';
 import { motion } from 'motion/react';
 import { RuleBlock } from './RuleBlock';
-import { Rule, RuleGroup } from '../../../views/App';
+import { Rule, RuleGroup } from '../../../views/@index';
 
 interface RuleGroupBuilderProps {
   group: RuleGroup;

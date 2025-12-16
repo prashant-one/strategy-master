@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Code, FileJson, Copy, Check } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Rule, RuleGroup, Strategy } from '../../../views/App';
+import { Rule, RuleGroup, Strategy } from '../../../views/@index';
 
 interface DSLPreviewProps {
   strategy: Strategy;
@@ -17,12 +17,12 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
     }
 
     const lines: string[] = [];
-    
+
     const formatParams = (params?: Array<{ name: string; value: string }>) => {
       if (!params || !Array.isArray(params) || params.length === 0) return '';
       return `(${params.map(p => p.value).join(', ')})`;
     };
-    
+
     group.rules.forEach((item, index) => {
       if (index > 0 && group.condition) {
         lines.push(indent + group.condition);
@@ -61,7 +61,7 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
             params: rule.params,
             operator: rule.operator
           };
-          
+
           // Add comparison data based on type
           if (rule.compareType === 'indicator') {
             ruleData.compareType = 'indicator';
@@ -71,7 +71,7 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
             ruleData.compareType = 'value';
             ruleData.value = rule.value;
           }
-          
+
           return ruleData;
         } else {
           return generateJSON(item as RuleGroup);
@@ -89,10 +89,10 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
   };
 
   const handleCopy = () => {
-    const content = activeFormat === 'dsl' 
+    const content = activeFormat === 'dsl'
       ? `ENTRY:\n${dslEntry}\n\nEXIT:\n${dslExit}`
       : JSON.stringify(jsonOutput, null, 2);
-    
+
     // Fallback method that works without clipboard permissions
     const textarea = document.createElement('textarea');
     textarea.value = content;
@@ -103,7 +103,7 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
     document.body.appendChild(textarea);
     textarea.focus();
     textarea.select();
-    
+
     try {
       document.execCommand('copy');
       setCopied(true);
@@ -147,22 +147,20 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
         <div className="px-6 flex gap-1">
           <button
             onClick={() => setActiveFormat('dsl')}
-            className={`px-4 py-2 text-sm transition-all ${
-              activeFormat === 'dsl'
+            className={`px-4 py-2 text-sm transition-all ${activeFormat === 'dsl'
                 ? 'text-purple-600 bg-white border-b-2 border-purple-600'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             <Code className="w-3 h-3 inline mr-1" />
             DSL
           </button>
           <button
             onClick={() => setActiveFormat('json')}
-            className={`px-4 py-2 text-sm transition-all ${
-              activeFormat === 'json'
+            className={`px-4 py-2 text-sm transition-all ${activeFormat === 'json'
                 ? 'text-purple-600 bg-white border-b-2 border-purple-600'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             <FileJson className="w-3 h-3 inline mr-1" />
             JSON

@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
-import { Layers, Plus, Play, Upload, Download } from 'lucide-react';
+import { Layers, Plus, Play, Upload, Download, Save } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { RuleGroupBuilder } from './RuleGroupBuilder';
-import { Rule, RuleGroup, Strategy } from '../../../views/App';
+import { Rule, RuleGroup, Strategy } from '../../../views/@index';
 
 interface StrategyBuilderProps {
   strategy: Strategy;
@@ -11,9 +11,10 @@ interface StrategyBuilderProps {
   isRunning: boolean;
   onExport: () => void;
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSave?: () => void;
 }
 
-export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunning, onExport, onImport }: StrategyBuilderProps) {
+export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunning, onExport, onImport, onSave }: StrategyBuilderProps) {
   const [activeTab, setActiveTab] = useState<'entry' | 'exit'>('entry');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -37,13 +38,23 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
       transition={{ delay: 0.1 }}
       className="bg-white border-b border-slate-200"
     >
-      <div className="px-6 py-4 bg-slate-50">
-        <div className="flex items-center justify-between">
+      <div className="px-4 sm:px-6 py-4 bg-slate-50">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Layers className="w-5 h-5 text-indigo-600" />
-            <h2 className="text-slate-900">Strategy Rules Builder</h2>
+            <h2 className="text-slate-900 text-base sm:text-lg">Strategy Rules Builder</h2>
           </div>
           <div className="flex items-center gap-2">
+            {onSave && (
+              <button
+                onClick={onSave}
+                title="Save Strategy"
+                className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-200 bg-white rounded"
+              >
+                <Save className="w-4 h-4" />
+                <span className="hidden sm:inline">Save</span>
+              </button>
+            )}
             <input
               type="file"
               ref={fileInputRef}
@@ -53,25 +64,29 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
             />
             <button
               onClick={() => fileInputRef.current?.click()}
+              title="Import Strategy"
               className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-200 bg-white rounded"
             >
               <Upload className="w-4 h-4" />
-              Import
+              <span className="hidden sm:inline">Import</span>
             </button>
             <button
               onClick={onExport}
+              title="Export Strategy"
               className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-200 bg-white rounded"
             >
               <Download className="w-4 h-4" />
-              Export
+              <span className="hidden sm:inline">Export</span>
             </button>
             <button
               onClick={onRunBacktest}
               disabled={!hasRules() || isRunning}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 hover:from-green-700 hover:to-emerald-700 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed rounded"
+              title="Run Backtest"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-3 sm:px-4 py-2 hover:from-green-700 hover:to-emerald-700 transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed rounded"
             >
               <Play className="w-4 h-4" />
-              {isRunning ? 'Running...' : 'Run Backtest'}
+              <span className="hidden sm:inline">{isRunning ? 'Running...' : 'Run'}</span>
+              <span className="sm:hidden">{isRunning ? '...' : 'Run'}</span>
             </button>
           </div>
         </div>

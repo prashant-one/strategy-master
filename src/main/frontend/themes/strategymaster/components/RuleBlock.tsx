@@ -1,6 +1,6 @@
 import { Trash2, Activity, ArrowLeftRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Rule } from '../../../views/App';
+import { Rule } from '../../../views/@index';
 
 interface RuleBlockProps {
   rule: Rule;
@@ -9,95 +9,95 @@ interface RuleBlockProps {
 }
 
 const INDICATORS = [
-  { 
-    value: 'RSI', 
-    label: 'RSI - Relative Strength Index', 
-    params: [{ name: 'period', label: 'Period', default: '14' }] 
+  {
+    value: 'RSI',
+    label: 'RSI - Relative Strength Index',
+    params: [{ name: 'period', label: 'Period', default: '14' }]
   },
-  { 
-    value: 'SMA', 
-    label: 'SMA - Simple Moving Average', 
-    params: [{ name: 'period', label: 'Period', default: '50' }] 
+  {
+    value: 'SMA',
+    label: 'SMA - Simple Moving Average',
+    params: [{ name: 'period', label: 'Period', default: '50' }]
   },
-  { 
-    value: 'EMA', 
-    label: 'EMA - Exponential Moving Average', 
-    params: [{ name: 'period', label: 'Period', default: '20' }] 
+  {
+    value: 'EMA',
+    label: 'EMA - Exponential Moving Average',
+    params: [{ name: 'period', label: 'Period', default: '20' }]
   },
-  { 
-    value: 'MACD', 
-    label: 'MACD - Moving Average Convergence Divergence', 
+  {
+    value: 'MACD',
+    label: 'MACD - Moving Average Convergence Divergence',
     params: [
       { name: 'fast', label: 'Fast', default: '12' },
       { name: 'slow', label: 'Slow', default: '26' },
       { name: 'signal', label: 'Signal', default: '9' }
-    ] 
+    ]
   },
-  { 
-    value: 'Stochastic', 
-    label: 'Stochastic Oscillator', 
+  {
+    value: 'Stochastic',
+    label: 'Stochastic Oscillator',
     params: [
       { name: 'kPeriod', label: 'K Period', default: '14' },
       { name: 'dPeriod', label: 'D Period', default: '3' },
       { name: 'smooth', label: 'Smooth', default: '3' }
-    ] 
+    ]
   },
-  { 
-    value: 'Bollinger', 
-    label: 'Bollinger Bands', 
+  {
+    value: 'Bollinger',
+    label: 'Bollinger Bands',
     params: [
       { name: 'period', label: 'Period', default: '20' },
       { name: 'stdDev', label: 'Std Dev', default: '2' }
-    ] 
+    ]
   },
-  { 
-    value: 'Keltner', 
-    label: 'Keltner Channels', 
+  {
+    value: 'Keltner',
+    label: 'Keltner Channels',
     params: [
       { name: 'period', label: 'Period', default: '20' },
       { name: 'atr', label: 'ATR', default: '10' },
       { name: 'multiplier', label: 'Multiplier', default: '2' }
-    ] 
+    ]
   },
-  { 
-    value: 'SuperTrend', 
-    label: 'SuperTrend', 
+  {
+    value: 'SuperTrend',
+    label: 'SuperTrend',
     params: [
       { name: 'period', label: 'Period', default: '10' },
       { name: 'multiplier', label: 'Multiplier', default: '3' }
-    ] 
+    ]
   },
-  { 
-    value: 'Ichimoku', 
-    label: 'Ichimoku Cloud', 
+  {
+    value: 'Ichimoku',
+    label: 'Ichimoku Cloud',
     params: [
       { name: 'tenkan', label: 'Tenkan', default: '9' },
       { name: 'kijun', label: 'Kijun', default: '26' },
       { name: 'senkou', label: 'Senkou', default: '52' }
-    ] 
+    ]
   },
-  { 
-    value: 'Donchian', 
-    label: 'Donchian Channels', 
+  {
+    value: 'Donchian',
+    label: 'Donchian Channels',
     params: [
       { name: 'period', label: 'Period', default: '20' },
       { name: 'shift', label: 'Shift', default: '0' }
-    ] 
+    ]
   },
-  { 
-    value: 'ATR', 
-    label: 'ATR - Average True Range', 
-    params: [{ name: 'period', label: 'Period', default: '14' }] 
+  {
+    value: 'ATR',
+    label: 'ATR - Average True Range',
+    params: [{ name: 'period', label: 'Period', default: '14' }]
   },
-  { 
-    value: 'Volume', 
-    label: 'Volume', 
-    params: [] 
+  {
+    value: 'Volume',
+    label: 'Volume',
+    params: []
   },
-  { 
-    value: 'Price', 
-    label: 'Price', 
-    params: [] 
+  {
+    value: 'Price',
+    label: 'Price',
+    params: []
   }
 ];
 
@@ -140,7 +140,7 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
       compareType: newType,
       // Set defaults when switching to indicator mode
       compareIndicator: newType === 'indicator' && !rule.compareIndicator ? 'SMA' : rule.compareIndicator,
-      compareParams: newType === 'indicator' && !rule.compareParams 
+      compareParams: newType === 'indicator' && !rule.compareParams
         ? smaIndicator?.params.map(param => ({ name: param.name, value: param.default }))
         : rule.compareParams
     });
@@ -163,9 +163,9 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
       if (!params || !Array.isArray(params) || params.length === 0) return '';
       return `(${params.map(p => p.value).join(', ')})`;
     };
-    
+
     const leftSide = `${rule.indicator}${formatParams(rule.params)}`;
-    const rightSide = compareType === 'indicator' 
+    const rightSide = compareType === 'indicator'
       ? `${rule.compareIndicator || 'SMA'}${formatParams(rule.compareParams)}`
       : rule.value;
     return `${leftSide} ${rule.operator} ${rightSide}`;
@@ -244,11 +244,10 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
               <span className="text-xs text-slate-600">Compare to:</span>
               <button
                 onClick={toggleCompareType}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
-                  compareType === 'value'
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${compareType === 'value'
                     ? 'bg-blue-50 text-blue-700 border border-blue-200'
                     : 'bg-purple-50 text-purple-700 border border-purple-200'
-                }`}
+                  }`}
               >
                 <ArrowLeftRight className="w-3 h-3" />
                 {compareType === 'value' ? 'Static Value' : 'Another Indicator'}
@@ -318,11 +317,10 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
 
       {/* Rule Preview */}
       <div className="mt-3 pt-3 border-t border-slate-100">
-        <div className={`text-xs font-mono px-3 py-2 rounded ${
-          compareType === 'value' 
-            ? 'bg-slate-50 text-slate-700' 
+        <div className={`text-xs font-mono px-3 py-2 rounded ${compareType === 'value'
+            ? 'bg-slate-50 text-slate-700'
             : 'bg-purple-50 text-purple-700'
-        }`}>
+          }`}>
           {generatePreview()}
         </div>
       </div>
