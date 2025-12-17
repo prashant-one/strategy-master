@@ -120,7 +120,7 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="bg-white border-b border-slate-200"
+      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
     >
       <div className="px-6 py-4 bg-slate-50">
         <div className="flex items-center justify-between">
@@ -148,8 +148,8 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
           <button
             onClick={() => setActiveFormat('dsl')}
             className={`px-4 py-2 text-sm transition-all ${activeFormat === 'dsl'
-                ? 'text-purple-600 bg-white border-b-2 border-purple-600'
-                : 'text-slate-600 hover:text-slate-900'
+              ? 'text-purple-600 bg-white border-b-2 border-purple-600'
+              : 'text-slate-600 hover:text-slate-900'
               }`}
           >
             <Code className="w-3 h-3 inline mr-1" />
@@ -158,8 +158,8 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
           <button
             onClick={() => setActiveFormat('json')}
             className={`px-4 py-2 text-sm transition-all ${activeFormat === 'json'
-                ? 'text-purple-600 bg-white border-b-2 border-purple-600'
-                : 'text-slate-600 hover:text-slate-900'
+              ? 'text-purple-600 bg-white border-b-2 border-purple-600'
+              : 'text-slate-600 hover:text-slate-900'
               }`}
           >
             <FileJson className="w-3 h-3 inline mr-1" />

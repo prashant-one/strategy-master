@@ -36,7 +36,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="bg-white border-b border-slate-200"
+      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
     >
       <div className="px-4 sm:px-6 py-4 bg-slate-50">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">

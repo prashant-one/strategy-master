@@ -65,7 +65,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="space-y-6"
+      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
     >
       {/* Title */}
       <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
@@ -80,82 +80,85 @@ export function BacktestResults({ results }: BacktestResultsProps) {
         </div>
       </div>
 
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {metrics.map((metric, index) => (
-          <motion.div
-            key={metric.label}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 + index * 0.05 }}
-            className="bg-white border border-slate-200 p-4 hover:border-blue-300 transition-all"
-          >
-            <div className={`inline-flex p-2 ${metric.bgColor} mb-2`}>
-              <metric.icon className={`w-5 h-5 ${metric.color}`} />
-            </div>
-            <div className="text-sm text-slate-600 mb-1">{metric.label}</div>
-            <div className={`text-slate-900 ${metric.color}`}>{metric.value}</div>
-          </motion.div>
-        ))}
-      </div>
+      {/* Content Sections */}
+      <div className="p-6 space-y-6">
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {metrics.map((metric, index) => (
+            <motion.div
+              key={metric.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 + index * 0.05 }}
+              className="bg-slate-50 border border-slate-200 rounded-lg p-4 hover:border-blue-300 transition-all"
+            >
+              <div className={`inline-flex p-2 rounded ${metric.bgColor} mb-2`}>
+                <metric.icon className={`w-5 h-5 ${metric.color}`} />
+              </div>
+              <div className="text-sm text-slate-600 mb-1">{metric.label}</div>
+              <div className={`text-lg font-semibold text-slate-900 ${metric.color}`}>{metric.value}</div>
+            </motion.div>
+          ))}
+        </div>
 
-      {/* Win/Loss Breakdown */}
-      <div className="bg-white border border-slate-200 p-6">
-        <h3 className="text-slate-900 mb-4">Trade Breakdown</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex items-center justify-between p-4 bg-green-50">
-            <span className="text-sm text-green-700">Winning Trades</span>
-            <span className="text-green-900">{results.winningTrades}</span>
-          </div>
-          <div className="flex items-center justify-between p-4 bg-red-50">
-            <span className="text-sm text-red-700">Losing Trades</span>
-            <span className="text-red-900">{results.losingTrades}</span>
+        {/* Win/Loss Breakdown */}
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4">Trade Breakdown</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+              <span className="text-sm font-medium text-green-700">Winning Trades</span>
+              <span className="text-xl font-bold text-green-900">{results.winningTrades}</span>
+            </div>
+            <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+              <span className="text-sm font-medium text-red-700">Losing Trades</span>
+              <span className="text-xl font-bold text-red-900">{results.losingTrades}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Equity Curve */}
-      <div className="bg-white border border-slate-200 p-6">
-        <h3 className="text-slate-900 mb-4">Equity Curve</h3>
-        <div className="h-80">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={results.equityCurve}>
-              <defs>
-                <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis
-                dataKey="date"
-                stroke="#64748b"
-                tick={{ fontSize: 12 }}
-                interval="preserveStartEnd"
-              />
-              <YAxis
-                stroke="#64748b"
-                tick={{ fontSize: 12 }}
-                tickFormatter={(value) => `₹${(value / 1000).toFixed(0)}k`}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: '#fff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-                }}
-                formatter={(value: number) => [`₹${value.toLocaleString()}`, 'Portfolio Value']}
-              />
-              <Area
-                type="monotone"
-                dataKey="value"
-                stroke="#3b82f6"
-                strokeWidth={2}
-                fill="url(#colorValue)"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+        {/* Equity Curve */}
+        <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4">Equity Curve</h3>
+          <div className="h-80 bg-white rounded-lg p-4">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={results.equityCurve}>
+                <defs>
+                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis
+                  dataKey="date"
+                  stroke="#64748b"
+                  tick={{ fontSize: 12 }}
+                  interval="preserveStartEnd"
+                />
+                <YAxis
+                  stroke="#64748b"
+                  tick={{ fontSize: 12 }}
+                  tickFormatter={(value) => `₹${(value / 1000).toFixed(0)}k`}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#fff',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+                  }}
+                  formatter={(value: number) => [`₹${value.toLocaleString()}`, 'Portfolio Value']}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="value"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  fill="url(#colorValue)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
 

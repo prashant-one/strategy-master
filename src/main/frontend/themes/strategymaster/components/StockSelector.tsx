@@ -37,7 +37,7 @@ export function StockSelector({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white border-b border-slate-200"
+      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
     >
       <div className="px-6 py-4 bg-slate-50">
         <div className="flex items-center gap-2">
