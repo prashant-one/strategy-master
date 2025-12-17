@@ -42,7 +42,7 @@ export function StockSelector({
       <div className="px-6 py-4 bg-slate-50">
         <div className="flex items-center gap-2">
           <Database className="w-5 h-5 text-blue-600" />
-          <h2 className="text-slate-900">Select Stock & Data Range</h2>
+          <h3 className="text-slate-500">Select Stock & Data Range</h3>
         </div>
       </div>
 

@@ -33,7 +33,7 @@ export default function MainLayout() {
                                     <TrendingUp className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <h1 className="text-slate-900 font-bold text-lg">AssetMaster</h1>
+                                    <h1 className="text-slate-500 font-bold text-l">AssetMaster</h1>
                                     <p className="text-xs text-slate-500">Strategy Builder</p>
                                 </div>
                             </div>

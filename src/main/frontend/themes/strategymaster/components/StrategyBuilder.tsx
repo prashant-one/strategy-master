@@ -42,7 +42,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Layers className="w-5 h-5 text-indigo-600" />
-            <h2 className="text-slate-900 text-base sm:text-lg">Strategy Rules Builder</h2>
+            <h3 className="text-slate-900 text-base sm:text-lg">Strategy Rules Builder</h3>
           </div>
           <div className="flex items-center gap-2">
             {onSave && (

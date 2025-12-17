@@ -187,20 +187,6 @@ export default function App() {
     return data;
   };
 
-  const generateMockTrades = () => {
-    const trades = [];
-    for (let i = 0; i < 10; i++) {
-      const profit = (Math.random() - 0.4) * 5000;
-      trades.push({
-        id: i + 1,
-        entry: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toLocaleDateString(),
-        exit: new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toLocaleDateString(),
-        profit: profit.toFixed(2),
-        return: ((profit / 100000) * 100).toFixed(2)
-      });
-    }
-    return trades.sort((a, b) => new Date(b.entry).getTime() - new Date(a.entry).getTime());
-  };
 
   return (
     <div className="min-h-screen bg-slate-50">
