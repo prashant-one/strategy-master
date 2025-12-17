@@ -106,7 +106,9 @@ const OPERATORS = [
   { value: '<', label: '< Less Than' },
   { value: '>=', label: '>= Greater Than or Equal' },
   { value: '<=', label: '<= Less Than or Equal' },
-  { value: '==', label: '== Equal To' }
+  { value: '==', label: '== Equal To' },
+  { value: 'crossesUp', label: 'crossesUp' },
+  { value: 'crossesDown', label: 'crossesDown' }
 ];
 
 export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
@@ -245,8 +247,8 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
               <button
                 onClick={toggleCompareType}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${compareType === 'value'
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                    : 'bg-purple-50 text-purple-700 border border-purple-200'
+                  ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                  : 'bg-purple-50 text-purple-700 border border-purple-200'
                   }`}
               >
                 <ArrowLeftRight className="w-3 h-3" />
@@ -318,8 +320,8 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
       {/* Rule Preview */}
       <div className="mt-3 pt-3 border-t border-slate-100">
         <div className={`text-xs font-mono px-3 py-2 rounded ${compareType === 'value'
-            ? 'bg-slate-50 text-slate-700'
-            : 'bg-purple-50 text-purple-700'
+          ? 'bg-slate-50 text-slate-700'
+          : 'bg-purple-50 text-purple-700'
           }`}>
           {generatePreview()}
         </div>

@@ -216,6 +216,10 @@ public class StrategyParserService {
                         new IsEqualRule(indicator, value));
             case "=":
                 return new IsEqualRule(indicator, value);
+            case "crossesUp":
+                return new CrossedUpIndicatorRule(indicator, value);
+            case "crossesDown":
+                return new CrossedDownIndicatorRule(indicator, value);
             default:
                 throw new IllegalArgumentException("Unknown operator: " + operator);
         }
