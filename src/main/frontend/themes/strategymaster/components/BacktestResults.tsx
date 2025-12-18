@@ -20,7 +20,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
   const metrics = [
     {
       label: 'Win Rate',
-      value: `${results.winRate}%`,
+      value: `${Number(results.winRate).toFixed(2)}%`,
       icon: Target,
       color: 'text-green-600',
       bgColor: 'bg-green-50',
@@ -171,7 +171,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
           <table className="w-full">
             <thead className="bg-slate-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs text-slate-600">Trade ID</th>
+                <th className="px-6 py-3 text-left text-xs text-slate-600">Index</th>
                 <th className="px-6 py-3 text-left text-xs text-slate-600">Entry Date</th>
                 <th className="px-6 py-3 text-left text-xs text-slate-600">Exit Date</th>
                 <th className="px-6 py-3 text-right text-xs text-slate-600">Profit/Loss</th>
@@ -179,11 +179,11 @@ export function BacktestResults({ results }: BacktestResultsProps) {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
-              {results.trades.map((trade) => (
+              {results.trades.map((trade, index) => (
                 <tr key={trade.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 text-sm text-slate-900">#{trade.id}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">{trade.entryDate}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">{trade.exitDate}</td>
+                  <td className="px-6 py-4 text-sm text-slate-900">{index + 1}</td>
+                  <td className="px-6 py-4 text-sm text-slate-600">{trade.entryDate.split('T')[0]}</td>
+                  <td className="px-6 py-4 text-sm text-slate-600">{trade.exitDate.split('T')[0]}</td>
                   <td className={`px-6 py-4 text-sm text-right ${parseFloat(trade.profit) > 0 ? 'text-green-600' : 'text-red-600'
                     }`}>
                     ₹{parseFloat(trade.profit).toLocaleString()}

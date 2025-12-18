@@ -42,7 +42,7 @@ export interface Strategy {
 }
 
 export default function App() {
-  const [selectedStock, setSelectedStock] = useState('NIFTY');
+  const [selectedStock, setSelectedStock] = useState('TCS.NS');
   const [range, setRange] = useState('1y');
   const [interval, setInterval] = useState('1d');
   // const [dataFetched, setDataFetched] = useState(false); // Removed

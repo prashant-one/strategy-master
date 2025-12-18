@@ -12,17 +12,6 @@ interface StockSelectorProps {
   dataFetched: boolean;
 }
 
-const STOCKS = [
-  { symbol: 'NIFTY', name: 'NIFTY 50' },
-  { symbol: 'TCS.NS', name: 'Tata Consultancy Services' },
-  { symbol: 'INFY.NS', name: 'Infosys Ltd' },
-  { symbol: 'RELIANCE.NS', name: 'Reliance Industries' },
-  { symbol: 'HDFCBANK.NS', name: 'HDFC Bank' },
-  { symbol: 'ICICIBANK.NS', name: 'ICICI Bank' },
-  { symbol: 'WIPRO.NS', name: 'Wipro Ltd' },
-  { symbol: 'SBIN.NS', name: 'State Bank of India' }
-];
-
 export function StockSelector({
   selectedStock,
   setSelectedStock,
@@ -54,17 +43,13 @@ export function StockSelector({
               <TrendingUp className="w-4 h-4 inline mr-1" />
               Stock Symbol
             </label>
-            <select
+            <input
+              type="text"
               value={selectedStock}
-              onChange={(e) => setSelectedStock(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-            >
-              {STOCKS.map((stock) => (
-                <option key={stock.symbol} value={stock.symbol}>
-                  {stock.symbol} - {stock.name}
-                </option>
-              ))}
-            </select>
+              onChange={(e) => setSelectedStock(e.target.value.toUpperCase())}
+              placeholder="Enter symbol (e.g. TCS.NS)"
+              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-slate-900 transition-all"
+            />
           </div>
 
           {/* Date Range */}
