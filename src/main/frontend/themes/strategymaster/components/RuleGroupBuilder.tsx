@@ -57,7 +57,7 @@ export function RuleGroupBuilder({ group, onChange, depth }: RuleGroupBuilderPro
   };
 
   const bgColor = depth === 0 ? 'bg-white' : depth === 1 ? 'bg-blue-50' : 'bg-purple-50';
-  const borderColor = depth === 0 ? 'border-slate-200' : depth === 1 ? 'border-blue-200' : 'border-purple-200';
+  const borderColor = depth === 0 ? 'border-slate-400' : depth === 1 ? 'border-blue-200' : 'border-purple-200';
 
   return (
     <div className={`${bgColor} ${borderColor} border-l-2 p-4`}>
@@ -77,7 +77,7 @@ export function RuleGroupBuilder({ group, onChange, depth }: RuleGroupBuilderPro
               <div className="flex justify-center my-2">
                 <button
                   onClick={toggleCondition}
-                  className="px-4 py-1 bg-white border border-slate-300 text-sm hover:bg-slate-50 transition-all"
+                  className="px-4 py-1 bg-white border border-slate-400 text-sm hover:bg-slate-50 transition-all"
                 >
                   {group.condition}
                 </button>

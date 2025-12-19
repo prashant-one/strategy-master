@@ -65,7 +65,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
+      className="bg-white rounded-xl shadow-lg border border-slate-400 overflow-hidden"
     >
       {/* Title */}
       <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
@@ -90,7 +90,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 + index * 0.05 }}
-              className="bg-slate-50 border border-slate-200 rounded-lg p-4 hover:border-blue-300 transition-all"
+              className="bg-slate-50 border border-slate-400 rounded-lg p-4 hover:border-blue-300 transition-all"
             >
               <div className={`inline-flex p-2 rounded ${metric.bgColor} mb-2`}>
                 <metric.icon className={`w-5 h-5 ${metric.color}`} />
@@ -102,7 +102,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
         </div>
 
         {/* Win/Loss Breakdown */}
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
+        <div className="bg-slate-50 border border-slate-400 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-slate-900 mb-4">Trade Breakdown</h3>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
@@ -117,7 +117,7 @@ export function BacktestResults({ results }: BacktestResultsProps) {
         </div>
 
         {/* Equity Curve */}
-        <div className="bg-slate-50 border border-slate-200 rounded-lg p-6">
+        <div className="bg-slate-50 border border-slate-400 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-slate-900 mb-4">Equity Curve</h3>
           <div className="h-80 bg-white rounded-lg p-4">
             <ResponsiveContainer width="100%" height="100%">
@@ -163,8 +163,8 @@ export function BacktestResults({ results }: BacktestResultsProps) {
       </div>
 
       {/* Recent Trades Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-400 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-400">
           <h3 className="text-slate-900">Recent Trades</h3>
         </div>
         <div className="overflow-x-auto">

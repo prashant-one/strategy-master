@@ -178,7 +178,7 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="bg-white border-l-2 border-slate-200 p-4 hover:border-blue-400 transition-all group"
+      className="bg-white border-l-2 border-slate-400 p-4 hover:border-blue-400 transition-all group"
     >
       <div className="flex items-start gap-3">
         <div className="mt-2 p-2 bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -194,7 +194,7 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
               <select
                 value={rule.indicator}
                 onChange={(e) => handleIndicatorChange(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-400 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {INDICATORS.map((ind) => (
                   <option key={ind.value} value={ind.value}>
@@ -215,7 +215,7 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
                       value={rule.params?.[index]?.value || paramDef.default}
                       onChange={(e) => updateParam(index, e.target.value)}
                       placeholder={paramDef.default}
-                      className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-slate-400 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 ))}
@@ -228,7 +228,7 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
               <select
                 value={rule.operator}
                 onChange={(e) => onChange({ ...rule, operator: e.target.value })}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-slate-400 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 {OPERATORS.map((op) => (
                   <option key={op.value} value={op.value}>
@@ -265,7 +265,7 @@ export function RuleBlock({ rule, onChange, onDelete }: RuleBlockProps) {
                   value={rule.value}
                   onChange={(e) => onChange({ ...rule, value: e.target.value })}
                   placeholder="30"
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-slate-400 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             ) : (

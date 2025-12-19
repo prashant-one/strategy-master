@@ -31,6 +31,11 @@ public class BacktestService {
     public BacktestResult runBacktest(StrategyRequest request) {
         // 1. Fetch Real Data from Yahoo Finance
         BarSeries series = fetchRealData(request.getStockSymbol(), request.getRange(), request.getInterval());
+        if (series.isEmpty()) {
+            throw new RuntimeException("No trade data found for " + request.getStockSymbol() +
+                    " in the selected range (" + request.getRange() + ") and interval (" + request.getInterval() +
+                    "). Please try a different combination.");
+        }
 
         // 2. Parse Strategy
         Strategy strategy = strategyParserService.parse(request, series);

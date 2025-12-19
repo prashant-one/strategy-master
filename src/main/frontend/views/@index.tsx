@@ -123,8 +123,9 @@ export default function App() {
       // @ts-ignore
       const result = await StrategyController.runBacktest(request);
       setBacktestResults(result);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Backtest failed", error);
+      toast.error(error.message || "Failed to run backtest. Please check your strategy and stock symbol.");
     } finally {
       setIsRunning(false);
     }

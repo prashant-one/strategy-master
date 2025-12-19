@@ -1,51 +1,64 @@
-# Custom project from Hilla
+# AssetMaster 🚀
 
-This project can be used as a starting point to create your own Hilla application with Spring Boot.
-It contains all the necessary configuration and some placeholder files to get you started.
+AssetMaster is a powerful, modern platform for building, backtesting, and analyzing algorithmic trading strategies. Built with Spring Boot and Hilla (React), it provides a seamless interface to turn trading ideas into verifiable results using real-market data.
 
-## Running the application
+## ✨ Key Features
 
-The project is a standard Maven project. To run it from the command line,
-type `mvnw` (Windows), or `./mvnw` (Mac & Linux), then open
-http://localhost:8080 in your browser.
+- **Dynamic Strategy Builder**: Build complex entry and exit rules using technical indicators (SMA, EMA, RSI, etc.) and price action.
+- **Yahoo Finance Integration**: Fetch real historical data for stocks (e.g., TCS.NS, NIFTY) across various timeframes and intervals.
+- **Backtesting Engine**: Powered by the robust `ta4j` library to provide accurate performance analysis.
+- **Visual Analytics**: 
+  - **Equity Curve**: Interactive charts showing capital growth over time.
+  - **Performance Metrics**: Win rate, Total Profit/Loss, Sharpe Ratio, and Drawdown.
+  - **Trade Breakdown**: Detailed view of winning vs. losing trades.
+- **Strategy Management**: 
+  - **DSL Preview**: View your strategy in a custom Domain Specific Language or JSON format.
+  - **Import/Export**: Save and load strategies locally.
+  - **Cloud Sync**: Save strategies to your account for access anywhere.
 
-You can also import the project to your IDE of choice as you would with any
-Maven project.
+## 🛠 Technology Stack
 
-## Deploying to Production
+- **Backend**: Java, Spring Boot, Spring Web, Maven.
+- **Quant Library**: [ta4j](https://github.com/ta4j/ta4j) (Technical Analysis library for Java).
+- **Frontend**: 
+  - [Hilla](https://hilla.dev/) (React + Spring Boot integration).
+  - [Tailwind CSS](https://tailwindcss.com/) for a modern, high-contrast card-style UI.
+  - [Motion](https://motion.dev/) for smooth animations.
+  - [Recharts](https://recharts.org/) for data visualization.
+  - [Lucide React](https://lucide.dev/) for beautiful iconography.
 
-To create a production build, call `mvnw clean package -Pproduction` (Windows),
-or `./mvnw clean package -Pproduction` (Mac & Linux).
-This will build a JAR file with all the dependencies and front-end resources,
-ready to be deployed. The file can be found in the `target` folder after the build completes.
+## 🚀 Getting Started
 
-Once the JAR file is built, you can run it using
-`java -jar target/myapp-1.0-SNAPSHOT.jar` (NOTE, replace
-`myapp-1.0-SNAPSHOT.jar` with the name of your jar).
+### Prerequisites
 
-## Project structure
+- Java 17 or later.
+- Maven 3.6+.
 
-<table style="width:100%; text-align: left;">
-  <tr><th>Directory</th><th>Description</th></tr>
-  <tr><td><code>src/main/frontend/</code></td><td>Client-side source directory</td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>index.html</code></td><td>HTML template</td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>index.ts</code></td><td>Frontend 
-entrypoint, bootstraps a React application</td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>routes.tsx</code></td><td>React Router routes definition</td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>MainLayout.tsx</code></td><td>Main 
-layout component, contains the navigation menu, uses <a href="https://hilla.dev/docs/react/components/app-layout">
-App Layout</a></td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>views/</code></td><td>UI view 
-components</td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>themes/</code></td><td>Custom  
-CSS styles</td></tr>
-  <tr><td><code>src/main/java/&lt;groupId&gt;/</code></td><td>Server-side 
-source directory, contains the server-side Java views</td></tr>
-  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;<code>Application.java</code></td><td>Server entry-point</td></tr>
-</table>
+### Running the application
 
-## Useful links
+1. Clone the repository.
+2. Run the application using Maven:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+3. Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-- Read the documentation at [hilla.dev/docs](https://hilla.dev/docs/).
-- Ask questions on [Stack Overflow](https://stackoverflow.com/questions/tagged/vaadin) or join our [Forum](https://vaadin.com/forum).
-- Report issues, create pull requests in [GitHub](https://github.com/vaadin/hilla).
+### Creating a Production Build
+
+To create an optimized production JAR:
+```bash
+./mvnw clean package -Pproduction
+```
+The resulting JAR will be available in the `target/` directory.
+
+## 🎨 UI & Design
+
+AssetMaster features a premium "Card-Style" UI characterized by:
+- **High Contrast**: Dark borders (`slate-400`) and 2px border widths for clear definition.
+- **Clean Aesthetics**: A soft `#F4F7FB` background that minimizes eye strain.
+- **Responsiveness**: Fully functional on desktop and mobile browsers.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+

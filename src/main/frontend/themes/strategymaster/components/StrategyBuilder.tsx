@@ -36,7 +36,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
+      className="bg-white rounded-xl shadow-lg border border-slate-400 overflow-hidden"
     >
       <div className="px-4 sm:px-6 py-4 bg-slate-50">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -49,7 +49,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
               <button
                 onClick={onSave}
                 title="Save Strategy"
-                className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-200 bg-white rounded"
+                className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-400 bg-white rounded"
               >
                 <Save className="w-4 h-4" />
                 <span className="hidden sm:inline">Save</span>
@@ -65,7 +65,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
             <button
               onClick={() => fileInputRef.current?.click()}
               title="Import Strategy"
-              className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-200 bg-white rounded"
+              className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-400 bg-white rounded"
             >
               <Upload className="w-4 h-4" />
               <span className="hidden sm:inline">Import</span>
@@ -73,7 +73,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
             <button
               onClick={onExport}
               title="Export Strategy"
-              className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-200 bg-white rounded"
+              className="text-slate-600 hover:text-blue-600 px-3 py-2 transition-all flex items-center gap-2 text-sm border border-slate-400 bg-white rounded"
             >
               <Download className="w-4 h-4" />
               <span className="hidden sm:inline">Export</span>
@@ -93,7 +93,7 @@ export function StrategyBuilder({ strategy, setStrategy, onRunBacktest, isRunnin
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-slate-200 bg-slate-50">
+      <div className="border-b border-slate-400 bg-slate-50">
         <div className="px-6 flex gap-1">
           <button
             onClick={() => setActiveTab('entry')}

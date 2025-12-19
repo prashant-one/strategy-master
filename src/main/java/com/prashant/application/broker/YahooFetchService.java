@@ -47,21 +47,57 @@ public class YahooFetchService {
             JsonObject jsonChart = stockDataJson.has(Constant.CHART)
                     ? stockDataJson.get(Constant.CHART).getAsJsonObject()
                     : null;
-            if (jsonChart == null) {
-                log.error("chart is not available in response");
+            if (jsonChart == null || !jsonChart.has(Constant.RESULT)) {
+                log.error("chart or result is not available in response");
+                return stockDataRecordList;
             }
             JsonArray arrayStockData = jsonChart.get(Constant.RESULT).getAsJsonArray();
+            if (arrayStockData.isEmpty()) {
+                log.error("Result array is empty");
+                return stockDataRecordList;
+            }
             JsonObject data = arrayStockData.get(0).getAsJsonObject();
+            if (!data.has(Constant.TIMESTAMP) || !data.has(Constant.INDICATORS)) {
+                log.error("Missing timestamp or indicators in data");
+                return stockDataRecordList;
+            }
             JsonArray timeStamp = data.get(Constant.TIMESTAMP).getAsJsonArray();
             JsonObject indicators = data.get(Constant.INDICATORS).getAsJsonObject();
-            JsonArray quote = indicators.get(Constant.QUOTE).getAsJsonArray();
-            JsonArray adjCloseArray = indicators.get("adjclose").getAsJsonArray();
-            JsonArray adjClose = adjCloseArray.get(0).getAsJsonObject().get("adjclose").getAsJsonArray();
-            JsonArray high = quote.get(0).getAsJsonObject().get(Constant.HIGH).getAsJsonArray();
-            JsonArray low = quote.get(0).getAsJsonObject().get(Constant.LOW).getAsJsonArray();
-            JsonArray open = quote.get(0).getAsJsonObject().get(Constant.OPEN).getAsJsonArray();
-            JsonArray close = quote.get(0).getAsJsonObject().get(Constant.CLOSE).getAsJsonArray();
-            JsonArray volume = quote.get(0).getAsJsonObject().get(Constant.VOLUME).getAsJsonArray();
+            JsonArray quote = indicators.has(Constant.QUOTE) ? indicators.get(Constant.QUOTE).getAsJsonArray() : null;
+
+            if (quote == null || quote.isEmpty()) {
+                log.error("Quote data is missing or empty");
+                return stockDataRecordList;
+            }
+
+            JsonArray high = quote.get(0).getAsJsonObject().has(Constant.HIGH)
+                    ? quote.get(0).getAsJsonObject().get(Constant.HIGH).getAsJsonArray()
+                    : null;
+            JsonArray low = quote.get(0).getAsJsonObject().has(Constant.LOW)
+                    ? quote.get(0).getAsJsonObject().get(Constant.LOW).getAsJsonArray()
+                    : null;
+            JsonArray open = quote.get(0).getAsJsonObject().has(Constant.OPEN)
+                    ? quote.get(0).getAsJsonObject().get(Constant.OPEN).getAsJsonArray()
+                    : null;
+            JsonArray close = quote.get(0).getAsJsonObject().has(Constant.CLOSE)
+                    ? quote.get(0).getAsJsonObject().get(Constant.CLOSE).getAsJsonArray()
+                    : null;
+            JsonArray volume = quote.get(0).getAsJsonObject().has(Constant.VOLUME)
+                    ? quote.get(0).getAsJsonObject().get(Constant.VOLUME).getAsJsonArray()
+                    : null;
+
+            JsonArray adjClose = null;
+            if (indicators.has("adjclose")) {
+                JsonArray adjCloseArray = indicators.get("adjclose").getAsJsonArray();
+                if (!adjCloseArray.isEmpty()) {
+                    adjClose = adjCloseArray.get(0).getAsJsonObject().get("adjclose").getAsJsonArray();
+                }
+            }
+
+            if (high == null || low == null || open == null || close == null) {
+                log.error("One or more required price arrays are missing");
+                return stockDataRecordList;
+            }
             for (int i = 0; i < timeStamp.size(); i++) {
                 Double openD = null;
                 Double highD = null;
@@ -81,10 +117,10 @@ public class YahooFetchService {
                 if (!close.get(i).isJsonNull() && close.get(i) != null) {
                     closeD = Double.parseDouble(df.format(close.get(i).getAsDouble()));
                 }
-                if (!volume.get(i).isJsonNull() && volume.get(i) != null) {
+                if (volume != null && !volume.get(i).isJsonNull() && volume.get(i) != null) {
                     volumeD = Double.parseDouble(df.format(volume.get(i).getAsDouble()));
                 }
-                if (!adjClose.get(i).isJsonNull() && adjClose.get(i) != null) {
+                if (adjClose != null && !adjClose.get(i).isJsonNull() && adjClose.get(i) != null) {
                     adjCloseD = Double.parseDouble(df.format(adjClose.get(i).getAsDouble()));
                 }
                 if (openD != null && highD != null && lowD != null && closeD != null) {

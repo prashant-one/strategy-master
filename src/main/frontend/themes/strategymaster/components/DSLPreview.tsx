@@ -120,13 +120,13 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
+      className="bg-white rounded-xl shadow-lg border border-slate-400 overflow-hidden"
     >
       <div className="px-6 py-4 bg-slate-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Code className="w-5 h-5 text-purple-600" />
-            <h2 className="text-slate-900">Strategy Preview</h2>
+            <h3 className="text-slate-900">Strategy Preview</h3>
           </div>
           <button
             onClick={handleCopy}
@@ -143,7 +143,7 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
       </div>
 
       {/* Format Tabs */}
-      <div className="border-b border-slate-200 bg-slate-50">
+      <div className="border-b border-slate-400 bg-slate-50">
         <div className="px-6 flex gap-1">
           <button
             onClick={() => setActiveFormat('dsl')}

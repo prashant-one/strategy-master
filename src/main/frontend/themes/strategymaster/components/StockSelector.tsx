@@ -26,7 +26,7 @@ export function StockSelector({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden"
+      className="bg-white rounded-xl shadow-lg border border-slate-400 overflow-hidden"
     >
       <div className="px-6 py-4 bg-slate-50">
         <div className="flex items-center gap-2">
@@ -48,7 +48,7 @@ export function StockSelector({
               value={selectedStock}
               onChange={(e) => setSelectedStock(e.target.value.toUpperCase())}
               placeholder="Enter symbol (e.g. TCS.NS)"
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-slate-900 transition-all"
+              className="w-full px-4 py-2 border border-slate-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-slate-900 transition-all"
             />
           </div>
 
@@ -61,7 +61,7 @@ export function StockSelector({
             <select
               value={range}
               onChange={(e) => setRange(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 border border-slate-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             >
               <option value="1d">1 Day</option>
               <option value="5d">5 Days</option>
@@ -85,7 +85,7 @@ export function StockSelector({
             <select
               value={interval}
               onChange={(e) => setInterval(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 border border-slate-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             >
               <option value="1m">1 Minute</option>
               <option value="2m">2 Minutes</option>

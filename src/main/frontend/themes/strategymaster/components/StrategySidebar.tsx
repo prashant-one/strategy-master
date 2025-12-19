@@ -24,7 +24,7 @@ export function StrategySidebar({ strategies, onLoad, onDelete, isOpen, onToggle
             {!isOpen && (
                 <button
                     onClick={onToggle}
-                    className="fixed left-0 top-24 z-30 bg-white border border-slate-200 p-2 rounded-r-md shadow-md hover:bg-slate-50 transition-colors"
+                    className="fixed left-0 top-24 z-30 bg-white border border-slate-400 p-2 rounded-r-md shadow-md hover:bg-slate-50 transition-colors"
                 >
                     <ChevronRight className="w-5 h-5 text-slate-600" />
                 </button>
@@ -37,10 +37,10 @@ export function StrategySidebar({ strategies, onLoad, onDelete, isOpen, onToggle
                         initial={{ x: -300, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -300, opacity: 0 }}
-                        className="fixed left-0 top-0 bottom-0 w-80 bg-white border-r border-slate-200 shadow-xl z-[60] flex flex-col"
+                        className="fixed left-0 top-0 bottom-0 w-80 bg-white border-r border-slate-400 shadow-xl z-[60] flex flex-col"
                     >
                         {/* Header */}
-                        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                        <div className="p-4 border-b border-slate-400 flex items-center justify-between bg-slate-50">
                             <h2 className="font-semibold text-slate-900 flex items-center gap-2">
                                 <FileText className="w-4 h-4 text-blue-600" />
                                 Saved Strategies
@@ -69,7 +69,7 @@ export function StrategySidebar({ strategies, onLoad, onDelete, isOpen, onToggle
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
-                                        className="group bg-white border border-slate-200 rounded-lg p-3 hover:border-blue-300 hover:shadow-sm transition-all cursor-pointer relative"
+                                        className="group bg-white border border-slate-400 rounded-lg p-3 hover:border-blue-300 hover:shadow-sm transition-all cursor-pointer relative"
                                         onClick={() => onLoad(item.strategy)}
                                     >
                                         <div className="flex justify-between items-start">
@@ -98,7 +98,7 @@ export function StrategySidebar({ strategies, onLoad, onDelete, isOpen, onToggle
                             )}
                         </div>
 
-                        <div className="p-4 border-t border-slate-200 bg-slate-50 text-xs text-slate-500 text-center">
+                        <div className="p-4 border-t border-slate-400 bg-slate-50 text-xs text-slate-500 text-center">
                             {strategies.length} strategies saved
                         </div>
                     </motion.div>
