@@ -85,7 +85,12 @@ export function StrategySidebar({ strategies, onLoad, onDelete, isOpen, onToggle
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    onDelete(item.id);
+                                                    const key = prompt('To delete this strategy, please enter the key:');
+                                                    if (key && key.toLowerCase() === 'prashant') {
+                                                        onDelete(item.id);
+                                                    } else if (key !== null) {
+                                                        alert('Invalid key. Deletion cancelled.');
+                                                    }
                                                 }}
                                                 className="opacity-0 group-hover:opacity-100 p-1.5 text-red-500 hover:bg-red-50 rounded transition-all"
                                                 title="Delete Strategy"

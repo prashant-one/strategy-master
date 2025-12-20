@@ -28,7 +28,7 @@ export default function MainLayout() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-6">
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
                                 <div className="w-10 h-10 flex-shrink-0">
                                     <img
                                         src="/icons/app-icon.png"
@@ -37,8 +37,8 @@ export default function MainLayout() {
                                     />
                                 </div>
                                 <div>
-                                    <h1 className="text-slate-500 font-bold text-l">AssetMaster</h1>
-                                    <p className="text-xs text-slate-500">Strategy Builder</p>
+                                    <h1 className="text-slate-900 font-bold text-xl">ASSETMASTER</h1>
+                                    {/* <p className="text-xs text-slate-500">Strategy Builder</p> */}
                                 </div>
                             </div>
 

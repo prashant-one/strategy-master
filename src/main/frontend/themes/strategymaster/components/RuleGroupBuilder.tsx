@@ -20,7 +20,12 @@ export function RuleGroupBuilder({ group, onChange, depth }: RuleGroupBuilderPro
       compareType: 'value'  // NEW: Default to comparing with value
     };
 
-    const newRules = [...(group.rules || []), { id: `wrapper-${Date.now()}`, type: 'rule' as const, rule: newRule }];
+    const newRules = [...(group.rules || []), {
+      id: `wrapper-${Date.now()}`,
+      type: 'rule' as const,
+      rule: newRule,
+      condition: 'AND' as 'AND' | 'OR' // Default join condition
+    }];
     onChange({ ...group, rules: newRules });
   };
 
@@ -52,8 +57,11 @@ export function RuleGroupBuilder({ group, onChange, depth }: RuleGroupBuilderPro
     onChange({ ...group, rules: newRules });
   };
 
-  const toggleCondition = () => {
-    onChange({ ...group, condition: group.condition === 'AND' ? 'OR' : 'AND' });
+  const toggleItemCondition = (index: number) => {
+    const newRules = [...(group.rules || [])];
+    const item = newRules[index];
+    newRules[index] = { ...item, condition: (item.condition === 'AND' ? 'OR' : 'AND') as 'AND' | 'OR' };
+    onChange({ ...group, rules: newRules });
   };
 
   const bgColor = depth === 0 ? 'bg-white' : depth === 1 ? 'bg-blue-50' : 'bg-purple-50';
@@ -76,10 +84,11 @@ export function RuleGroupBuilder({ group, onChange, depth }: RuleGroupBuilderPro
             {index > 0 && (
               <div className="flex justify-center my-2">
                 <button
-                  onClick={toggleCondition}
+                  type="button"
+                  onClick={() => toggleItemCondition(index)}
                   className="px-4 py-1 bg-white border border-slate-400 text-sm hover:bg-slate-50 transition-all"
                 >
-                  {group.condition}
+                  {item.condition || 'AND'}
                 </button>
               </div>
             )}

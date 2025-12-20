@@ -4,3 +4,7 @@ target/
 node_modules/
 src/main/frontend/generated/
 vite.generated.ts
+
+# H2 Database
+*.mv.db
+*.trace.db

@@ -22,25 +22,46 @@ interface SavedStrategy {
 export default function StrategiesView() {
     const [strategies, setStrategies] = useState<SavedStrategy[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchStrategies();
+        fetchStrategies(0);
     }, []);
 
-    const fetchStrategies = async () => {
+    const fetchStrategies = async (pageToFetch: number) => {
+        if (loading) return;
+        setLoading(true);
         try {
             // @ts-ignore
-            const data = await StrategyController.getSavedStrategies();
-            setStrategies((data || []).filter((s: any) => s != null) as SavedStrategy[]);
+            const data = await StrategyController.getSavedStrategies(pageToFetch);
+            const newStrategies = (data || []).filter((s: any) => s != null) as SavedStrategy[];
+
+            if (pageToFetch === 0) {
+                setStrategies(newStrategies);
+            } else {
+                setStrategies(prev => [...prev, ...newStrategies]);
+            }
+
+            setHasMore(newStrategies.length === 20); // Assuming 20 items per page
+            setPage(pageToFetch);
         } catch (error) {
             console.error('Failed to fetch strategies', error);
+        } finally {
+            setLoading(false);
         }
+    };
+
+    const handleLoadMore = () => {
+        fetchStrategies(page + 1);
     };
 
     const handleDelete = async (id: string, e: React.MouseEvent) => {
         e.stopPropagation();
-        if (confirm('Are you sure you want to delete this strategy?')) {
+        const key = prompt('To delete this strategy, please enter the key:');
+        if (key && key.toLowerCase() === 'prashant') {
             try {
                 // @ts-ignore
                 await StrategyController.deleteStrategy(id);
@@ -48,6 +69,8 @@ export default function StrategiesView() {
             } catch (error) {
                 console.error('Failed to delete strategy', error);
             }
+        } else if (key !== null) {
+            alert('Invalid key. Deletion cancelled.');
         }
     };
 
@@ -67,13 +90,15 @@ export default function StrategiesView() {
                     <p className="text-slate-500">Manage your saved trading strategies</p>
                 </div>
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+                    {/* <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <Search className="text-slate-400 w-4 h-4" />
+                    </div> */}
                     <input
                         type="text"
                         placeholder="Search strategies..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                        className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                     />
                 </div>
             </div>
@@ -139,6 +164,18 @@ export default function StrategiesView() {
                     </table>
                 )}
             </div>
+
+            {hasMore && strategies.length > 0 && (
+                <div className="mt-8 text-center">
+                    <button
+                        onClick={handleLoadMore}
+                        disabled={loading}
+                        className="px-6 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {loading ? 'Loading...' : 'Load More Strategies'}
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

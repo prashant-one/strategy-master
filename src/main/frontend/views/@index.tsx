@@ -98,6 +98,7 @@ export default function App() {
       };
     } else if (node.type === 'rule' && node.rule) {
       return {
+        condition: node.condition,
         indicator: node.rule.indicator,
         operator: node.rule.operator,
         value: node.rule.value,

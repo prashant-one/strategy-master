@@ -7,6 +7,10 @@ import com.prashant.application.repository.StrategyRepository;
 import com.prashant.application.services.BacktestService;
 import com.vaadin.hilla.BrowserCallable;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import java.util.List;
 
 @BrowserCallable
 @AnonymousAllowed
@@ -24,8 +28,9 @@ public class StrategyController {
         return strategyRepository.findById(id).orElse(null);
     }
 
-    public java.util.List<SavedStrategy> getSavedStrategies() {
-        return strategyRepository.findAll();
+    public List<SavedStrategy> getSavedStrategies(int page) {
+        Pageable pageable = PageRequest.of(page, 20, Sort.by(Sort.Direction.DESC, "savedAt"));
+        return strategyRepository.findAll(pageable).getContent();
     }
 
     public SavedStrategy saveStrategy(SavedStrategy strategy) {

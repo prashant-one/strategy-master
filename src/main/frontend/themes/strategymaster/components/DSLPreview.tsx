@@ -24,8 +24,9 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
     };
 
     group.rules.forEach((item, index) => {
-      if (index > 0 && group.condition) {
-        lines.push(indent + group.condition);
+      if (index > 0) {
+        const condition = item.condition || group.condition || 'AND';
+        lines.push(indent + condition);
       }
 
       if (item.type === 'rule' && item.rule) {
@@ -57,6 +58,7 @@ export function DSLPreview({ strategy }: DSLPreviewProps) {
         if (item.type === 'rule' && item.rule) {
           const rule = item.rule;
           const ruleData: any = {
+            condition: item.condition, // Include item-level condition
             indicator: rule.indicator,
             params: rule.params,
             operator: rule.operator

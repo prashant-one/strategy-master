@@ -92,8 +92,11 @@ export function SavedStrategiesDialog({ isOpen, onClose, strategies, onLoad, onD
                                     <button
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            if (confirm('Are you sure you want to delete this strategy?')) {
+                                            const key = prompt('To delete this strategy, please enter the key:');
+                                            if (key && key.toLowerCase() === 'prashant') {
                                                 onDelete(item.id);
+                                            } else if (key !== null) {
+                                                alert('Invalid key. Deletion cancelled.');
                                             }
                                         }}
                                         className="opacity-0 group-hover:opacity-100 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-all"

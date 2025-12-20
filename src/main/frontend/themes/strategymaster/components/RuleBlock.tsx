@@ -9,96 +9,94 @@ interface RuleBlockProps {
 }
 
 const INDICATORS = [
+  // --- Price Helpers ---
+  { value: 'Price', label: 'Price (Close)', params: [] },
+  { value: 'Open', label: 'Price (Open)', params: [] },
+  { value: 'High', label: 'Price (High)', params: [] },
+  { value: 'Low', label: 'Price (Low)', params: [] },
+
+  // --- Trend Strength ---
+  { value: 'ADX', label: 'ADX - Average Directional Index', params: [{ name: 'period', label: 'Period', default: '14' }] },
+  { value: 'PlusDI', label: 'Plus DI (+DI)', params: [{ name: 'period', label: 'Period', default: '14' }] },
+  { value: 'MinusDI', label: 'Minus DI (-DI)', params: [{ name: 'period', label: 'Period', default: '14' }] },
+
+  // --- Momentum & Oscillators ---
+  { value: 'RSI', label: 'RSI - Relative Strength Index', params: [{ name: 'period', label: 'Period', default: '14' }] },
   {
-    value: 'RSI',
-    label: 'RSI - Relative Strength Index',
-    params: [{ name: 'period', label: 'Period', default: '14' }]
-  },
-  {
-    value: 'SMA',
-    label: 'SMA - Simple Moving Average',
-    params: [{ name: 'period', label: 'Period', default: '50' }]
-  },
-  {
-    value: 'EMA',
-    label: 'EMA - Exponential Moving Average',
-    params: [{ name: 'period', label: 'Period', default: '20' }]
-  },
-  {
-    value: 'MACD',
-    label: 'MACD - Moving Average Convergence Divergence',
-    params: [
+    value: 'MACD', label: 'MACD - Moving Average Convergence Divergence', params: [
       { name: 'fast', label: 'Fast', default: '12' },
-      { name: 'slow', label: 'Slow', default: '26' },
-      { name: 'signal', label: 'Signal', default: '9' }
+      { name: 'slow', label: 'Slow', default: '26' }
     ]
   },
+  { value: 'Stochastic', label: 'Stochastic Oscillator', params: [{ name: 'kPeriod', label: 'K Period', default: '14' }] },
+  { value: 'ROC', label: 'ROC - Rate of Change', params: [{ name: 'period', label: 'Period', default: '12' }] },
+  { value: 'Momentum', label: 'Momentum', params: [{ name: 'period', label: 'Period', default: '14' }] },
+  { value: 'CCI', label: 'CCI - Commodity Channel Index', params: [{ name: 'period', label: 'Period', default: '20' }] },
+  { value: 'WilliamsR', label: 'Williams %R', params: [{ name: 'period', label: 'Period', default: '14' }] },
+  { value: 'AwesomeOscillator', label: 'Awesome Oscillator', params: [] },
+
+  // --- Volatility ---
+  { value: 'StandardDeviation', label: 'Standard Deviation', params: [{ name: 'period', label: 'Period', default: '20' }] },
+  { value: 'ATR', label: 'ATR - Average True Range', params: [{ name: 'period', label: 'Period', default: '14' }] },
+  { value: 'TR', label: 'True Range', params: [] },
+
+  // --- Volume Based ---
+  { value: 'Volume', label: 'Volume', params: [] },
+  { value: 'OBV', label: 'OBV - On-Balance Volume', params: [] },
+  { value: 'VWAP', label: 'VWAP - Volume Weighted Average Price', params: [{ name: 'period', label: 'Period', default: '14' }] },
+  { value: 'ADL', label: 'ADL - Accumulation/Distribution Line', params: [] },
+
+  // --- Moving Averages ---
+  { value: 'SMA', label: 'SMA - Simple Moving Average', params: [{ name: 'period', label: 'Period', default: '50' }] },
+  { value: 'EMA', label: 'EMA - Exponential Moving Average', params: [{ name: 'period', label: 'Period', default: '20' }] },
+  { value: 'WMA', label: 'WMA - Weighted Moving Average', params: [{ name: 'period', label: 'Period', default: '20' }] },
+  { value: 'HMA', label: 'HMA - Hull Moving Average', params: [{ name: 'period', label: 'Period', default: '20' }] },
+
+  // --- Support / Resistance & Channels ---
+  { value: 'HighestHigh', label: 'Highest High', params: [{ name: 'period', label: 'Period', default: '20' }] },
+  { value: 'LowestLow', label: 'Lowest Low', params: [{ name: 'period', label: 'Period', default: '20' }] },
   {
-    value: 'Stochastic',
-    label: 'Stochastic Oscillator',
-    params: [
-      { name: 'kPeriod', label: 'K Period', default: '14' },
-      { name: 'dPeriod', label: 'D Period', default: '3' },
-      { name: 'smooth', label: 'Smooth', default: '3' }
-    ]
-  },
-  {
-    value: 'Bollinger',
-    label: 'Bollinger Bands',
-    params: [
+    value: 'BollingerUpper', label: 'Bollinger Bands Upper', params: [
       { name: 'period', label: 'Period', default: '20' },
       { name: 'stdDev', label: 'Std Dev', default: '2' }
     ]
   },
   {
-    value: 'Keltner',
-    label: 'Keltner Channels',
-    params: [
+    value: 'BollingerLower', label: 'Bollinger Bands Lower', params: [
       { name: 'period', label: 'Period', default: '20' },
-      { name: 'atr', label: 'ATR', default: '10' },
+      { name: 'stdDev', label: 'Std Dev', default: '2' }
+    ]
+  },
+  {
+    value: 'KeltnerUpper', label: 'Keltner Channel Upper', params: [
+      { name: 'period', label: 'Period', default: '20' },
+      { name: 'atr', label: 'ATR Period', default: '10' },
       { name: 'multiplier', label: 'Multiplier', default: '2' }
     ]
   },
   {
-    value: 'SuperTrend',
-    label: 'SuperTrend',
-    params: [
+    value: 'KeltnerLower', label: 'Keltner Channel Lower', params: [
+      { name: 'period', label: 'Period', default: '20' },
+      { name: 'atr', label: 'ATR Period', default: '10' },
+      { name: 'multiplier', label: 'Multiplier', default: '2' }
+    ]
+  },
+  { value: 'DonchianUpper', label: 'Donchian Channel Upper', params: [{ name: 'period', label: 'Period', default: '20' }] },
+  { value: 'DonchianLower', label: 'Donchian Channel Lower', params: [{ name: 'period', label: 'Period', default: '20' }] },
+
+  // --- Trend Reversal ---
+  { value: 'ParabolicSar', label: 'Parabolic SAR', params: [] },
+  { value: 'Fisher', label: 'Fisher Transform', params: [{ name: 'period', label: 'Period', default: '10' }] },
+
+  // --- Cloud & Others ---
+  {
+    value: 'SuperTrend', label: 'SuperTrend', params: [
       { name: 'period', label: 'Period', default: '10' },
       { name: 'multiplier', label: 'Multiplier', default: '3' }
     ]
   },
-  {
-    value: 'Ichimoku',
-    label: 'Ichimoku Cloud',
-    params: [
-      { name: 'tenkan', label: 'Tenkan', default: '9' },
-      { name: 'kijun', label: 'Kijun', default: '26' },
-      { name: 'senkou', label: 'Senkou', default: '52' }
-    ]
-  },
-  {
-    value: 'Donchian',
-    label: 'Donchian Channels',
-    params: [
-      { name: 'period', label: 'Period', default: '20' },
-      { name: 'shift', label: 'Shift', default: '0' }
-    ]
-  },
-  {
-    value: 'ATR',
-    label: 'ATR - Average True Range',
-    params: [{ name: 'period', label: 'Period', default: '14' }]
-  },
-  {
-    value: 'Volume',
-    label: 'Volume',
-    params: []
-  },
-  {
-    value: 'Price',
-    label: 'Price',
-    params: []
-  }
+  { value: 'IchimokuTenkan', label: 'Ichimoku Tenkan-Sen', params: [{ name: 'tenkan', label: 'Tenkan', default: '9' }] },
+  { value: 'IchimokuKijun', label: 'Ichimoku Kijun-Sen', params: [{ name: 'kijun', label: 'Kijun', default: '26' }] }
 ];
 
 const OPERATORS = [
