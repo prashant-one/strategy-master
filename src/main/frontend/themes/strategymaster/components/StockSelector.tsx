@@ -87,14 +87,6 @@ export function StockSelector({
               onChange={(e) => setInterval(e.target.value)}
               className="w-full px-4 py-2.5 border border-slate-400 bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             >
-              <option value="1m">1 Minute</option>
-              <option value="2m">2 Minutes</option>
-              <option value="5m">5 Minutes</option>
-              <option value="15m">15 Minutes</option>
-              <option value="30m">30 Minutes</option>
-              <option value="60m">60 Minutes</option>
-              <option value="90m">90 Minutes</option>
-              <option value="1h">1 Hour</option>
               <option value="1d">1 Day</option>
               <option value="5d">5 Days</option>
               <option value="1wk">1 Week</option>
