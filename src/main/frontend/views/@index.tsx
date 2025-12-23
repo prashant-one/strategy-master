@@ -9,7 +9,7 @@ import { TrendingUp, Zap } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
 import "./index.css";
 // @ts-ignore
-import * as StrategyController from 'Frontend/generated/StrategyController';
+import * as StrategyEndpint from 'Frontend/generated/StrategyEndpint';
 import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
 
 export const config: ViewConfig = {
@@ -56,6 +56,8 @@ export default function App() {
   // Persistence State
   const [searchParams] = useSearchParams();
   const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
+  const [currentStrategyId, setCurrentStrategyId] = useState<string | null>(null);
+  const [currentStrategyName, setCurrentStrategyName] = useState<string | null>(null);
 
   useEffect(() => {
     const strategyId = searchParams.get('strategyId');
@@ -67,9 +69,11 @@ export default function App() {
   const loadStrategy = async (id: string) => {
     try {
       // @ts-ignore
-      const saved = await StrategyController.getStrategy(id);
+      const saved = await StrategyEndpint.getStrategy(id);
       if (saved && saved.strategyJson) {
         setStrategy(JSON.parse(saved.strategyJson));
+        setCurrentStrategyId(saved.id ?? null);
+        setCurrentStrategyName(saved.name ?? null);
       }
     } catch (e) {
       console.error("Failed to load strategy", e);
@@ -82,7 +86,7 @@ export default function App() {
 
   const onSaveStrategy = async (name: string) => {
     // @ts-ignore
-    await StrategyController.saveStrategy({
+    await StrategyEndpint.saveStrategy({
       name: name.trim(),
       strategyJson: JSON.stringify(strategy)
     });
@@ -93,12 +97,12 @@ export default function App() {
   const mapToBackendConfig = (node: RuleGroup): any => {
     if (node.type === 'group') {
       return {
-        condition: node.condition,
+        condition: node.condition || 'AND',
         rules: node.rules?.map(mapToBackendConfig) || []
       };
     } else if (node.type === 'rule' && node.rule) {
       return {
-        condition: node.condition,
+        condition: node.condition || 'AND',
         indicator: node.rule.indicator,
         operator: node.rule.operator,
         value: node.rule.value,
@@ -119,10 +123,12 @@ export default function App() {
         range: range,
         interval: interval,
         entry: mapToBackendConfig(strategy.entryRules),
-        exit: mapToBackendConfig(strategy.exitRules)
+        exit: mapToBackendConfig(strategy.exitRules),
+        strategyId: currentStrategyId,
+        strategyName: currentStrategyName
       };
       // @ts-ignore
-      const result = await StrategyController.runBacktest(request);
+      const result = await StrategyEndpint.runBacktest(request);
       setBacktestResults(result);
     } catch (error: any) {
       console.error("Backtest failed", error);

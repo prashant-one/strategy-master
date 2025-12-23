@@ -12,7 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * and some desktop browsers.
  *
  */
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 @SpringBootApplication
+@EnableScheduling
 @Theme(value = "strategymaster")
 public class Application implements AppShellConfigurator {
 

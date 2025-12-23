@@ -6,6 +6,24 @@ public class StrategyRequest {
     private String interval;
     private RulesConfig entry;
     private RulesConfig exit;
+    private String strategyId;
+    private String strategyName;
+
+    public String getStrategyId() {
+        return strategyId;
+    }
+
+    public void setStrategyId(String strategyId) {
+        this.strategyId = strategyId;
+    }
+
+    public String getStrategyName() {
+        return strategyName;
+    }
+
+    public void setStrategyName(String strategyName) {
+        this.strategyName = strategyName;
+    }
 
     public String getStockSymbol() {
         return stockSymbol;

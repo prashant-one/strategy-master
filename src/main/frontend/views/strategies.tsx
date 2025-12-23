@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ViewConfig } from '@vaadin/hilla-file-router/types.js';
 import { useNavigate } from 'react-router';
-import { Trash2, Play, Clock, Search, FileText } from 'lucide-react';
+import { Trash2, Play, Clock, Search, FileText, PlayCircle } from 'lucide-react';
 // @ts-ignore
-import * as StrategyController from 'Frontend/generated/StrategyController';
+import * as StrategyEndpint from 'Frontend/generated/StrategyEndpint';
 import { Strategy } from './@index';
 import "./index.css";
 
@@ -36,7 +36,7 @@ export default function StrategiesView() {
         setLoading(true);
         try {
             // @ts-ignore
-            const data = await StrategyController.getSavedStrategies(pageToFetch);
+            const data = await StrategyEndpint.getSavedStrategies(pageToFetch);
             const newStrategies = (data || []).filter((s: any) => s != null) as SavedStrategy[];
 
             if (pageToFetch === 0) {
@@ -64,13 +64,25 @@ export default function StrategiesView() {
         if (key && key.toLowerCase() === 'prashant') {
             try {
                 // @ts-ignore
-                await StrategyController.deleteStrategy(id);
+                await StrategyEndpint.deleteStrategy(id);
                 setStrategies(strategies.filter(s => s && s.id !== id));
             } catch (error) {
                 console.error('Failed to delete strategy', error);
             }
         } else if (key !== null) {
             alert('Invalid key. Deletion cancelled.');
+        }
+    };
+
+    const handleRun = async (id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        try {
+            // @ts-ignore
+            await StrategyEndpint.runSavedStrategy(id);
+            alert('Strategy executed successfully! View results in History.');
+        } catch (error) {
+            console.error('Failed to run strategy', error);
+            alert('Execution failed. Check console for details.');
         }
     };
 
@@ -145,7 +157,7 @@ export default function StrategiesView() {
                                                     handleLoad(strategy.id);
                                                 }}
                                                 className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                                                title="Load Strategy"
+                                                title="Edit in Builder"
                                             >
                                                 <Play className="w-4 h-4" />
                                             </button>

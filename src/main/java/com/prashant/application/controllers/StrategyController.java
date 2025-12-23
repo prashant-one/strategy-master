@@ -1,50 +1,40 @@
 package com.prashant.application.controllers;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.prashant.application.dto.strategy.BacktestResult;
 import com.prashant.application.dto.strategy.StrategyRequest;
-import com.prashant.application.entity.SavedStrategy;
-import com.prashant.application.repository.StrategyRepository;
 import com.prashant.application.services.BacktestService;
-import com.vaadin.hilla.BrowserCallable;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import java.util.List;
+import com.prashant.application.services.StrategyScheduleService;
 
-@BrowserCallable
-@AnonymousAllowed
+@RestController
+@RequestMapping("/strategy")
 public class StrategyController {
 
     private final BacktestService backtestService;
-    private final StrategyRepository strategyRepository;
+    private final StrategyScheduleService scheduleService;
 
-    public StrategyController(BacktestService backtestService, StrategyRepository strategyRepository) {
+    public StrategyController(BacktestService backtestService, StrategyScheduleService scheduleService) {
         this.backtestService = backtestService;
-        this.strategyRepository = strategyRepository;
+        this.scheduleService = scheduleService;
     }
 
-    public SavedStrategy getStrategy(String id) {
-        return strategyRepository.findById(id).orElse(null);
+    @PostMapping("/run")
+    public BacktestResult runBacktest(@RequestBody StrategyRequest request) {
+        BacktestResult result = backtestService.runBacktest(request);
+
+        String sId = request.getStrategyId() != null && !request.getStrategyId().isEmpty()
+                ? request.getStrategyId()
+                : "Manual";
+        String sName = request.getStrategyName() != null && !request.getStrategyName().isEmpty()
+                ? request.getStrategyName()
+                : "Manual Builder Run";
+
+        scheduleService.saveRunResult(sId, sName, request, result);
+        return result;
     }
 
-    public List<SavedStrategy> getSavedStrategies(int page) {
-        Pageable pageable = PageRequest.of(page, 20, Sort.by(Sort.Direction.DESC, "savedAt"));
-        return strategyRepository.findAll(pageable).getContent();
-    }
-
-    public SavedStrategy saveStrategy(SavedStrategy strategy) {
-        if (strategy.getSavedAt() == null) {
-            strategy.setSavedAt(java.time.LocalDateTime.now());
-        }
-        return strategyRepository.save(strategy);
-    }
-
-    public void deleteStrategy(String id) {
-        strategyRepository.deleteById(id);
-    }
-
-    public BacktestResult runBacktest(StrategyRequest request) {
-        return backtestService.runBacktest(request);
-    }
 }

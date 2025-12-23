@@ -46,6 +46,7 @@ export default function MainLayout() {
                             <nav className="hidden md:flex items-center gap-1">
                                 <NavLinkItem to="/" icon={Layers}>Builder</NavLinkItem>
                                 <NavLinkItem to="/strategies" icon={List}>Strategies</NavLinkItem>
+                                <NavLinkItem to="/history" icon={TrendingUp}>History</NavLinkItem>
                             </nav>
                         </div>
 
@@ -64,6 +65,7 @@ export default function MainLayout() {
                     <div className="md:hidden border-t border-slate-400 bg-white px-4 py-2 space-y-1">
                         <NavLinkItem to="/" icon={Layers}>Builder</NavLinkItem>
                         <NavLinkItem to="/strategies" icon={List}>Strategies</NavLinkItem>
+                        <NavLinkItem to="/history" icon={TrendingUp}>History</NavLinkItem>
                     </div>
                 )}
             </header>
