@@ -29,11 +29,12 @@ export default function MainLayout() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-6">
                             <div className="flex items-center gap-2">
-                                <div className="w-10 h-10 flex-shrink-0">
+                                <div className="flex-shrink-0" style={{ width: '40px', height: '40px' }}>
                                     <img
                                         src="/icons/app-icon.png"
                                         alt="AssetMaster Logo"
-                                        className="w-m h-m object-contain rounded"
+                                        className="object-contain rounded"
+                                        style={{ width: '100%', height: '100%' }}
                                     />
                                 </div>
                                 <div>
