@@ -2,9 +2,6 @@
 
 StrategyMaster is a powerful, web-based platform designed for traders to build, test, and refine algorithmic trading strategies without writing code. Leveraging the robust `ta4j` library and a modern stack (Vaadin Hilla, Spring Boot, React), it provides a seamless experience from strategy conception to backtest analysis.
 
-![App Screenshot](file:///Users/prashantkushwaha/IdeaProjects/strategymaster/src/main/resources/static/screenshots/main_app.png) 
-*(Note: Replace with actual screenshot path if available)*
-
 ## ✨ Key Features
 
 ### 🛠️ Visual Strategy Builder
@@ -46,8 +43,19 @@ Comprehensive support for a wide range of indicators:
    ```
 3. Open your browser and navigate to `http://localhost:8080`.
 
+
 ## 🛠️ Technology Stack
 - **Backend**: Spring Boot, Spring Data JPA, H2 Database.
 - **Frontend**: Vaadin Hilla (React + TypeScript), Tailwind CSS.
 - **Trading Logic**: [ta4j](https://github.com/ta4j/ta4j) - Technical Analysis for Java.
 - **Icons**: Lucide React / Line Awesome.
+
+## Screenshots
+
+![App Screenshot](https://github.com/prashant-one/strategy-master/blob/main/assets/builder.png) 
+
+![App Screenshot](https://github.com/prashant-one/strategy-master/blob/main/assets/strategy.png) 
+
+![App Screenshot](https://github.com/prashant-one/strategy-master/blob/main/assets/history.png) 
+
+
