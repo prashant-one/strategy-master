@@ -51,9 +51,11 @@
     "class-variance-authority": "^0.7.1",
     "cmdk": "^1.1.1",
     "construct-style-sheets-polyfill": "3.1.0",
+    "d3": "^7.9.0",
     "date-fns": "2.29.3",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
+    "lightweight-charts": "^5.1.0",
     "lit": "3.3.1",
     "lucide-react": "^0.561.0",
     "motion": "^12.23.26",
@@ -77,6 +79,7 @@
     "@rollup/plugin-replace": "6.0.3",
     "@rollup/pluginutils": "5.3.0",
     "@tailwindcss/postcss": "^4.1.18",
+    "@types/d3": "^7.4.3",
     "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
     "@vaadin/hilla-generator-cli": "24.9.7",
@@ -169,7 +172,7 @@
       "workbox-core": "7.3.0",
       "workbox-precaching": "7.3.0"
     },
-    "hash": "60397760e383eb8291b41d5e681d623f0bd8fee5bb848c51a28ae6120a6ba262"
+    "hash": "66c41e1e46e6b00142cddffc97d102421db18e632752268cf85a22d1b54205fd"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
@@ -316,6 +319,8 @@
     "recharts": "$recharts",
     "sonner": "$sonner",
     "vaul": "$vaul",
-    "tailwind-merge": "$tailwind-merge"
+    "tailwind-merge": "$tailwind-merge",
+    "d3": "$d3",
+    "lightweight-charts": "$lightweight-charts"
   }
 }

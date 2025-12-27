@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91c92070-2013-4ce3-84fa-f3187ae68742" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/frontend/views/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/themes/strategymaster/theme.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/frontend/views/@layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/views/@layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-    </list>
+    <list default="true" id="91c92070-2013-4ce3-84fa-f3187ae68742" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
