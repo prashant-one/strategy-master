@@ -64,6 +64,7 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
             layout: {
                 background: { color: theme.backgroundColor },
                 textColor: theme.textColor,
+                attributionLogo: false,
             },
             grid: {
                 vertLines: { color: theme.gridColor },
@@ -79,10 +80,6 @@ export const CandlestickChart: React.FC<CandlestickChartProps> = ({
                 borderColor: theme.gridColor,
                 timeVisible: true,
                 secondsVisible: false,
-            },
-            // @ts-ignore - watermark option exists but not in type definitions
-            watermark: {
-                visible: false,
             },
         });
 

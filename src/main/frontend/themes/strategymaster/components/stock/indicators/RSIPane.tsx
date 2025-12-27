@@ -42,6 +42,7 @@ export const RSIPane: React.FC<RSIPaneProps> = ({
             layout: {
                 background: { color: '#ffffff' },
                 textColor: '#191919',
+                attributionLogo: false,
             },
             grid: {
                 vertLines: { color: '#f0f0f0' },
@@ -57,10 +58,6 @@ export const RSIPane: React.FC<RSIPaneProps> = ({
             timeScale: {
                 borderColor: '#f0f0f0',
                 visible: false, // Hide time scale (synced with main chart)
-            },
-            // @ts-ignore - watermark option exists but not in type definitions
-            watermark: {
-                visible: false,
             },
         });
 
